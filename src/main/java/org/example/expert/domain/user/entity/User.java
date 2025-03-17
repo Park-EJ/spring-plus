@@ -29,14 +29,16 @@ public class User extends Timestamped {
         this.nickname = nickname;
     }
 
-    private User(Long id, String email, UserRole userRole) {
+    private User(Long id, String email, UserRole userRole, String nickname) {
         this.id = id;
         this.email = email;
         this.userRole = userRole;
+        this.nickname = nickname;
     }
 
     public static User fromAuthUser(AuthUser authUser) {
-        return new User(authUser.getId(), authUser.getEmail(), authUser.getUserRole());
+        UserRole userRole = UserRole.of(authUser.getAuthorities().iterator().next().getAuthority());
+        return new User(authUser.getId(), authUser.getEmail(), userRole, authUser.getNickname());
     }
 
     public void changePassword(String password) {

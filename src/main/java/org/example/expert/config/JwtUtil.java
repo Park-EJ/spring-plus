@@ -6,7 +6,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
-import org.example.expert.domain.common.exception.ServerException;
 import org.example.expert.domain.user.enums.UserRole;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -34,6 +33,7 @@ public class JwtUtil {
         key = Keys.hmacShaKeyFor(bytes);
     }
 
+    // (1) 클라이언트가 로그인을 하면 서버가 JWT를 생성하여 클라이언트에 반환함
     public String createToken(Long userId, String email, UserRole userRole, String nickname) {
         Date date = new Date();
 
@@ -49,13 +49,16 @@ public class JwtUtil {
                         .compact();
     }
 
+    // JwtAuthenticationFilter에서 사용(2번 과정 중)
     public String substringToken(String tokenValue) {
         if (StringUtils.hasText(tokenValue) && tokenValue.startsWith(BEARER_PREFIX)) {
             return tokenValue.substring(7);
         }
-        throw new ServerException("Not Found Token");
+        log.error("Not Found Token");
+        throw new NullPointerException("Not Found Token");
     }
 
+    // JwtAuthenticationFilter에서 사용(2번 과정 중)
     public Claims extractClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(key)
