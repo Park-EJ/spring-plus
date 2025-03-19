@@ -25,14 +25,6 @@ public class AdminAccessLoggingAspect {
 
     @Before("execution(* org.example.expert.domain.user.controller.UserAdminController.changeUserRole(..))")
     public void logBeforeChangeUserRole(JoinPoint joinPoint) {
-//        String userId = String.valueOf(request.getAttribute("userId")); // -> null
-//        String requestUrl = request.getRequestURI();
-//        LocalDateTime requestTime = LocalDateTime.now();
-//
-//            log.info("Admin Access Log - User ID: {}, Request Time: {}, Request URL: {}, Method: {}",
-//                    userId, requestTime, requestUrl, joinPoint.getSignature().getName());
-//        }
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         AuthUser authUser = (AuthUser) authentication.getPrincipal();
 
