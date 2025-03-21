@@ -30,6 +30,7 @@ AdminAccessLoggingAspect에서 HttpServletRequest request.getAttribute("userId")
 String userId = String.valueOf(authUser.getId());
   
 
+    
 ## Spring Security 관련 추가 학습 내용
 (1) 코드 동작 순서
 - 사용자가 로그인 후 JWT를 발급받음
