@@ -43,6 +43,6 @@ String userId = String.valueOf(authUser.getId());
 .requestMatchers("/admin/**").hasAuthority(UserRole.Authority.ADMIN) 
 
 - 2번 방법) UserAdminService에서 @PreAuthorize 또는 @Secured 사용
-@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+.@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 
 
