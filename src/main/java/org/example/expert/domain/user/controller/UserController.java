@@ -24,9 +24,4 @@ public class UserController {
     public void changePassword(@AuthenticationPrincipal AuthUser authUser, @RequestBody UserChangePasswordRequest userChangePasswordRequest) {
         userService.changePassword(authUser.getId(), userChangePasswordRequest);
     }
-
-    @GetMapping("/users/healthcheck")
-    public String healthCheck() {
-        return "healthCheck가 호출되었습니다.";
-    }
 }
