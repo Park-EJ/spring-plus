@@ -29,6 +29,7 @@ AdminAccessLoggingAspect에서 HttpServletRequest request.getAttribute("userId")
 
 String userId = String.valueOf(authUser.getId());
 
+
 ## Spring Security 관련 추가 학습 내용
 (1) 코드 동작 순서
 - 사용자가 로그인 후 JWT를 발급받음
@@ -38,10 +39,10 @@ String userId = String.valueOf(authUser.getId());
 - 요청이 컨트롤러로 전달되고, @AuthenticationPrincipal 등을 사용하여 인증된 사용자 정보를 활용
 
 (2) 권한 설정(ADMIN)
-1번 방법) SecurityConfig에서 /admin/** 경로를 ADMIN 전용으로 설정
+- 1번 방법) SecurityConfig에서 /admin/** 경로를 ADMIN 전용으로 설정
 .requestMatchers("/admin/**").hasAuthority(UserRole.Authority.ADMIN) 
 
-2번 방법) UserAdminService에서 @PreAuthorize 또는 @Secured 사용
+- 2번 방법) UserAdminService에서 @PreAuthorize 또는 @Secured 사용
 @PreAuthorize("hasAuthority('ROLE_ADMIN')")
 
 
