@@ -29,7 +29,7 @@ AdminAccessLoggingAspect에서 HttpServletRequest request.getAttribute("userId")
 
 String userId = String.valueOf(authUser.getId());
   
-
+<br/>
     
 ## Spring Security 관련 추가 학습 내용
 (1) 코드 동작 순서
