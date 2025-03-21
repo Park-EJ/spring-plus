@@ -13,18 +13,18 @@
 - AOP User ID null
 ![AOP userId null](https://github.com/user-attachments/assets/fff8de43-44dc-4661-9864-ccfa7ba2f49e)
 
-● 배경
+● 배경  
 : AdminAccessLoggingAspect - logBeforeChangeUserRole 메서드 실행 시 로그에 User ID : null 발생
 
-● 원인
+● 원인  
 : Spring Security 설정 후 HttpServletRequest에서 getAttribute("userId")로 정보를 가져오지 못함
 
-● 해결방안 1
+● 해결방안 1  
 : SecurityContextHolder를 활용하여 userId를 로그에 반환하도록 수정한다.
 AdminAccessLoggingAspect에서 HttpServletRequest request.getAttribute("userId")를 사용하여 userId를 가져오고 있지만, 이는 JwtAuthenticationFilter에서 request.setAttribute("userId", userId)를 설정하지 않으면 null이 된다.
 따라서, Spring Security로 변경 후에는 SecurityContextHolder를 활용하여 userId를 가져오는 방식으로 수정한다.
 
-● 해결방안 2
+● 해결방안 2  
 : Spring Security로 변경 후 UserAdminController에서 @AuthenticationPrincipal AuthUser authUser을 파라미터로 받는다. 그리고 authUser를 통해서 userId를 조회한다.
 
 String userId = String.valueOf(authUser.getId());
